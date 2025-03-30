@@ -178,7 +178,8 @@ static char cgc_do_get_orders(void) {
 
 	// loop through tables
 	DBG("getting table orders\n");
-	for (unsigned int table_id = 1; table_id <= TABLE_CNT; table_id++) {
+	unsigned int table_id;
+	for (table_id = 1; table_id <= TABLE_CNT; table_id++) {
 		DBG("get orders for table %U\n", table_id);
 		order_count += cgc_get_orders_from_table(table_id, &o_array[table_id]);
 	}
@@ -188,7 +189,7 @@ static char cgc_do_get_orders(void) {
 	DBG("sending %U orders\n", order_count);
 
 	// send orders
-	for (unsigned int table_id = 1; table_id <= TABLE_CNT; table_id++) {
+	for (table_id = 1; table_id <= TABLE_CNT; table_id++) {
 		o = cgc_pop_order_from_list(&o_array[table_id]);
 		while (NULL != o) {
 			ids[0] = o->t_id;

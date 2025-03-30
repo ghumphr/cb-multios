@@ -102,7 +102,8 @@ void cgc_simon_command(char *t) {
 
     // Print sequence
     cgc_printf("Simon says: ");
-    for (int i = 0; i < rounds; i++) {
+    int i;
+    for (i = 0; i < rounds; i++) {
       cgc_printf("@s ", color_names[sequence[i]]);
     }
     cgc_printf(":\n");
@@ -112,7 +113,7 @@ void cgc_simon_command(char *t) {
     }
 
     // Check response
-    for (int i = 0; i < rounds; i++) {
+    for (i = 0; i < rounds; i++) {
       if (sequence[i] != (response[i] - '0')) {
         cgc_printf("Simon says no fuzzing\n");
         if (rounds >= 8) {

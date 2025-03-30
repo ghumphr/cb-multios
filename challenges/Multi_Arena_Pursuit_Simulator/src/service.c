@@ -811,21 +811,22 @@ void cgc_initCityMap(Map **map_ptr) {
 	int newCoordinate=0;
 
 	V = 0;
-	for(int x=-1; x<=1; x++) {
-		for(int y=-1; y<=1; y++) {
+	int x, y;
+	for(x=-1; x<=1; x++) {
+		for(y=-1; y<=1; y++) {
 			cgc_setCoordinate(map_ptr, x, y, V);
 		}
 	}
 
 	V = 1;
-	for (int x = V; x <= V+2; x++) {
-		for(int y=-1; y<=1; y++) {
+	for (x = V; x <= V+2; x++) {
+		for(y=-1; y<=1; y++) {
 			if(cgc_getCoordinate(*map_ptr, x, y) == -1)
 				cgc_setCoordinate(map_ptr, x, y, V);
 		}	
 	}
-	for (int x = -1; x <= 1; x++) {
-		for(int y=V; y<=V+2; y++) {
+	for (x = -1; x <= 1; x++) {
+		for(y=V; y<=V+2; y++) {
 			if(cgc_getCoordinate(*map_ptr, x, y) == -1)
 				cgc_setCoordinate(map_ptr, x, y, V);
 		}	
@@ -921,7 +922,8 @@ int main(int cgc_argc, char *cgc_argv[]) {
 
 	cgc_initCityMap(&cityMap);
 
-	for(int t=0; t<100; t++) {	
+	int t;
+	for(t=0; t<100; t++) {	
 		cgc_initCarChase(&criminal);
 		cgc_bzero(send_buffer, SEND_SZ);
 		cgc_sprintf(send_buffer, "Criminal at (!I, !I)\n", criminal.x, criminal.y);
@@ -961,7 +963,7 @@ int main(int cgc_argc, char *cgc_argv[]) {
 	cgc_freeMap(&cityMap);
 	cgc_initHarborMap(&harborMap);
 	
-	for(int t=0; t<100; t++) {
+	for(t=0; t<100; t++) {
 
 		cgc_initHarborChase(&criminal);
 		cgc_bzero(send_buffer, SEND_SZ);

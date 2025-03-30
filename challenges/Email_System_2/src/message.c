@@ -272,7 +272,7 @@ void cgc_print_draft_for_send(char *name)
 	int dst_index = cgc_get_user_index(globs.listOfMessages[my_index][choice].to);
 
 	int target = -1;
-	for (int i = 0; i < MAX_MESSAGES; i++)
+	for (i = 0; i < MAX_MESSAGES; i++)
 	{
 		if (globs.listOfMessages[dst_index][i].match != 0xbeef)
 		{

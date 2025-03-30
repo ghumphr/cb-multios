@@ -1,6 +1,10 @@
 #ifndef _LIBCGC_H
 #define _LIBCGC_H
 
+#if __STDC_VERSION__ < 199901L
+#define restrict
+#endif
+
 #define STDIN 0
 #define STDOUT 1
 #define STDERR 2

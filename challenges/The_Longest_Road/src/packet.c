@@ -702,7 +702,7 @@ int cgc_encrypt_data(char *data, int len, int type)
 	if (type == ENC_TWO)
 	{
 		int i = 0;
-		for (int i = 0; i < len; i++)
+		for (i = 0; i < len; i++)
 		{
 			int char_index = cgc_locate_char(data[i]);
 			if (char_index == -1)
@@ -732,7 +732,7 @@ int cgc_encrypt_data(char *data, int len, int type)
 	if (type == ENC_ONE)
 	{
 		int i = 0;
-		for (int i = 0; i < len; i++)
+		for (i = 0; i < len; i++)
 		{
 			int char_index = cgc_locate_char(data[i]);
 			if (char_index == -1)
@@ -769,7 +769,7 @@ int cgc_decrypt_packet(char *data, int len, int type)
 	if (type == ENC_TWO)
 	{
 		int i = 0;
-		for (int i = 0; i < len; i++)
+		for (i = 0; i < len; i++)
 		{
 			int char_index = cgc_locate_char(data[i]);
 			if (char_index == -1)
@@ -800,7 +800,7 @@ int cgc_decrypt_packet(char *data, int len, int type)
 	if (type == ENC_ONE)
 	{
 		int i = 0;
-		for (int i = 0; i < len; i++)
+		for (i = 0; i < len; i++)
 		{
 			int char_index = cgc_locate_char(data[i]);
 			if (char_index == -1)

@@ -121,9 +121,9 @@ int cgc_printf(const char *fmt, ...)
                 break;
             case 's':
                 astring = va_arg(ap, char *);
-//                for (i = 0; i < cgc_strlen(astring); i++)
-//                    OUTPUT_BYTE(astring[i]);
-                cgc_send_n_bytes(STDOUT, astring, cgc_strlen(astring));
+                for (i = 0; i < cgc_strlen(astring); i++)
+                    OUTPUT_BYTE(astring[i]);
+//                cgc_send_n_bytes(STDOUT, astring, cgc_strlen(astring));
                 break;
             case 'd':
                 aint = va_arg(ap, int);

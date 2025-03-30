@@ -150,6 +150,7 @@ void calculate_results(Card card1[], Card card2[], unsigned char count) {
 	unsigned short max = 0;
 	unsigned short sums[10] = {0};
 
+	int pid;
 	FOR_EACH_PLAYER
 		sums[pid] = (unsigned short)card1[pid].value + (unsigned short)card2[pid].value;
 		if (max < sums[pid]) {
@@ -256,6 +257,7 @@ int deal_one_round(void) {
 	}
 	DBG("Dealing new round\n");
 
+	int pid;
 	FOR_EACH_PLAYER
 		cgc_start_round(pid);
 	}
@@ -378,6 +380,7 @@ int quit(int ret) {
 		DBG("Quitting due to invalid cmd\n");
 	}
 #endif
+	int pid;
 	FOR_EACH_PLAYER
 		cgc_player_quit(pid);
 	}

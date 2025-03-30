@@ -76,7 +76,8 @@ int main(int cgc_argc, char *cgc_argv[]) {
    	*/
    	SEND_CMD(CMD_ADD_CUST);
    	SEND_UCHAR(&c_count);
-   	for (int i = 0; i < CUSTOMER_COUNT; i++) {
+	int zi;
+   	for (zi = 0; zi < CUSTOMER_COUNT; zi++) {
    		SEND_UINT(&reg);
    		reg++;
    	}
@@ -100,7 +101,8 @@ int main(int cgc_argc, char *cgc_argv[]) {
    	*/
    	SEND_CMD(CMD_GET_ORDERS);
    	RECV_UCHAR(&o_count);
-   	for (unsigned int i = 0; i < o_count; i++) {
+	unsigned int i;
+   	for (i = 0; i < o_count; i++) {
    		o = cgc_malloc(sizeof(Order));
    		if (!o) return -1;
 
@@ -149,7 +151,7 @@ int main(int cgc_argc, char *cgc_argv[]) {
    	*/
    	SEND_CMD(CMD_GET_ORDERS);
    	RECV_UCHAR(&o_count);
-   	for (unsigned int i = 0; i < o_count; i++) {
+   	for (i = 0; i < o_count; i++) {
    		o = cgc_malloc(sizeof(Order));
    		if (!o) return -1;
 
@@ -198,7 +200,7 @@ int main(int cgc_argc, char *cgc_argv[]) {
    	*/
    	SEND_CMD(CMD_GET_ORDERS);
    	RECV_UCHAR(&o_count);
-   	for (unsigned int i = 0; i < o_count; i++) {
+   	for (i = 0; i < o_count; i++) {
    		o = cgc_malloc(sizeof(Order));
    		if (!o) return -1;
 

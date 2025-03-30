@@ -364,7 +364,8 @@ int cgc_parse_msg_type_5(char *english, const char *ais_msg) {
 
 	// callsign 42 bits (7 six-bit chars)
 	skip = FALSE;
-	for (int idx = 0; idx < 7; idx++) {
+	int idx;
+	for (idx = 0; idx < 7; idx++) {
 		if (0 > (val = cgc_get_bits_from_sixer(&s, 6))) {return ERR_INVALID_MESSAGE;}
 		byte = cgc_sixer_bits_to_ASCII_str_char(val);
 		if (('@' == byte) || (TRUE == skip)) {
@@ -378,7 +379,7 @@ int cgc_parse_msg_type_5(char *english, const char *ais_msg) {
 	p_eng++;
 
 	skip = FALSE;
-	for (int idx = 0; idx < 20; idx++) {
+	for (idx = 0; idx < 20; idx++) {
 		if (0 > (val = cgc_get_bits_from_sixer(&s, 6))) {return ERR_INVALID_MESSAGE;}
 		byte = cgc_sixer_bits_to_ASCII_str_char(val);
 		if (('@' == byte) || (TRUE == skip)) {
@@ -451,7 +452,7 @@ int cgc_parse_msg_type_5(char *english, const char *ais_msg) {
 
 	// dest 120 bits (20 six-bit chars)
 	skip = FALSE;
-	for (int idx = 0; idx < 20; idx++) {
+	for (idx = 0; idx < 20; idx++) {
 		if (0 > (val = cgc_get_bits_from_sixer(&s, 6))) {return ERR_INVALID_MESSAGE;}
 		byte = cgc_sixer_bits_to_ASCII_str_char(val);
 		if (('@' == byte) || (TRUE == skip)) {

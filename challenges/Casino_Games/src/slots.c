@@ -34,9 +34,10 @@ THE SOFTWARE.
 // Print the slot machine state
 void cgc_print_board(int board_size, unsigned char board[][board_size])
 {
-	for (int y=0; y<board_size; y++)
+	int x, y;
+	for (y=0; y<board_size; y++)
 	{
-		for(int x=0; x<board_size; x++)
+		for(x=0; x<board_size; x++)
 		{
 			cgc_printf("@c ", board[x][y]);
 		}
@@ -47,6 +48,7 @@ void cgc_print_board(int board_size, unsigned char board[][board_size])
 // Runs the slot machine game
 void cgc_slots(player_info *player)
 {
+	int x, y;
 	player_info placeholder;
 	if (player == 0)
 	{
@@ -89,9 +91,9 @@ void cgc_slots(player_info *player)
 		}
 
 		// Generate board
-		for (int x=0; x < board_size; x++)
+		for (x=0; x < board_size; x++)
 		{
-			for(int y=0; y < board_size; y++)
+			for(y=0; y < board_size; y++)
 			{
 				board[x][y] = cgc_random_in_range('!', max_char);
 			}	
@@ -100,7 +102,6 @@ void cgc_slots(player_info *player)
 
 		// Check for a win
 		// Column check
-		int x, y;
 		for (x = 0; x < board_size; x++)
 		{
 			for (y = 1; y < board_size; y++)

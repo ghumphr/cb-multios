@@ -67,7 +67,7 @@ int cgc_rev_cmd(const char *s)
     return -1;
 
   char *start = r;
-  char *end = cgc_strchr(r, '\0') - 1;
+  char *end = (void *) cgc_strchr(r, '\0') - 1;
   while (start < end) {
     *start ^= *end;
     *end ^= *start;
@@ -298,7 +298,7 @@ int cgc_tick_common(const char *s, list *cmds, const char *botname, unsigned cty
       error(ECMD);
 
     if (cgc_strchr(s, ' '))
-        s = cgc_strchr(s, ' ') + 1;
+        s = (void *) cgc_strchr(s, ' ') + 1;
     else
         s = s + cgc_strlen(c->keyword);
 

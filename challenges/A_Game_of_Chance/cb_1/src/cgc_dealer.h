@@ -24,7 +24,7 @@
 
 #define PLAYER_COUNT 5
 
-#define FOR_EACH_PLAYER 	for (unsigned int pid = 1; pid <= PLAYER_COUNT; pid++) {
+#define FOR_EACH_PLAYER 	for (pid = 1; pid <= PLAYER_COUNT; pid++) {
 
 cgc_ssize_t process(void);
 

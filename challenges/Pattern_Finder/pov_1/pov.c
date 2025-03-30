@@ -154,7 +154,8 @@ int main(int cgc_argc, char *cgc_argv[])
 
   // Build sig corpus
   cgc_send_string(1, "64\n");
-  for (cgc_size_t i = 0; i < 63; i++)
+  cgc_size_t i;
+  for (i = 0; i < 63; i++)
     cgc_send_sig(i);
   cgc_send_string(1, "1\n");
 
@@ -178,14 +179,14 @@ int main(int cgc_argc, char *cgc_argv[])
   cgc_send_string(1, "IXJoCprRTvaLdqZY\n");
 
   cgc_send_string(1, "176\n");
-  for (cgc_size_t i = 41; i < 41 + 8; ++i)
+  for (i = 41; i < 41 + 8; ++i)
     cgc_send_string(1, sigs[i][1]);
   cgc_send_string(1, "IXJoCprRTvaLdqZY");
   cgc_send_string(1, "41bytepathnnnnnn");
   cgc_send_string(1, "23bytepathnnnnnn");
 
   cgc_send_string(1, "176\n");
-  for (cgc_size_t i = 41; i < 41 + 8; ++i)
+  for (i = 41; i < 41 + 8; ++i)
     cgc_send_string(1, sigs[i][1]);
   cgc_send_string(1, "IXJoCprRTvaLdqZY");
   cgc_send_string(1, "41bytepathnnnnnn");

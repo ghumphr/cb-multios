@@ -338,12 +338,13 @@ void cgc_msls_send_finish(CLIENT_CONTEXT *context)
 
   // Generate server secret
   context->server_secret = cgc_calloc(PUBLIC_KEY_LEN * sizeof(uint32_t));
-  for (int i=0; i < PUBLIC_KEY_LEN; i++)
+  int i;
+  for (i=0; i < PUBLIC_KEY_LEN; i++)
   {
     context->server_secret[i] = ((uint32_t *)SERVER_SECRET1)[i] ^ ((uint32_t *)SERVER_SECRET2)[i];
   }
   // Create FINISHED Message
-  for (int i=0; i < PUBLIC_KEY_LEN; i++)
+  for (i=0; i < PUBLIC_KEY_LEN; i++)
   {
     hs_fin_msg->hash[i] = context->server_secret[i] ^ context->client_secret[i] ^ context->client_key[i] ^ context->cookie[i];
   }

@@ -446,12 +446,12 @@ suffix_list* cgc_merge_sort(suffix_list* input)
   suffix_list* l = cgc_make_suffix_list(length);
   suffix_list* r = cgc_make_suffix_list(length);
 
-  cgc_size_t middle = length / 2;
+  cgc_size_t middle = length / 2, i;
 
-  for (cgc_size_t i = 0; i < middle; i++)
+  for (i = 0; i < middle; i++)
     cgc_append_suffix_list(l, cgc_get_suffix(input, i));
 
-  for (cgc_size_t i = middle; i < length; i++)
+  for (i = middle; i < length; i++)
     cgc_append_suffix_list(r, cgc_get_suffix(input, i));
 
   suffix_list* ls = cgc_merge_sort(l);
@@ -467,16 +467,16 @@ suffix_list* cgc_merge_sort(suffix_list* input)
 
 cgc_size_t* cgc_build_suffix_array(char* input)
 {
-  cgc_size_t length = cgc_strlen(input);
+  cgc_size_t length = cgc_strlen(input), i;
   cgc_size_t* sa = cgc_mcalloc(sizeof(cgc_size_t) * length);
 
   suffix_list* list = cgc_make_suffix_list(length);
-  for (cgc_size_t i = 0; i < length; i++)
+  for (i = 0; i < length; i++)
     cgc_append_suffix_list(list, cgc_make_suffix(i, input + i));
 
   list = cgc_merge_sort(list);
 
-  for (cgc_size_t i = 0; i < length; i++) {
+  for (i = 0; i < length; i++) {
     sa[i] = cgc_get_suffix(list, i)->index;
   }
   return sa;

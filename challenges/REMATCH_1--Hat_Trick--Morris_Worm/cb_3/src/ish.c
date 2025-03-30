@@ -175,18 +175,19 @@ int main(int cgc_argc, char *cgc_argv[]) {
 
     //Setup my flag page
     int *myflagpage = cgc_calloc(PAGE_SIZE);
-    for (int i=0; i< PAGE_SIZE/4; i++) {
+    int i;
+    for (i=0; i< PAGE_SIZE/4; i++) {
       myflagpage[i] = ((int *)FLAG_PAGE)[i] & 0xff000000;
     }
 
     
     // Initialize host list
     cgc_srand();
-    for (int i= 1; i< MAX_USERS; i++) {
+    for (i= 1; i< MAX_USERS; i++) {
       userlist[i].username = cgc_gen_random_string(5, 32);
       userlist[i].password = cgc_gen_random_string(5, 32);
     }
-    for (int i=1; i< MAX_HOSTS; i++) {
+    for (i=1; i< MAX_HOSTS; i++) {
       hostlist[i].hostname = cgc_gen_random_string(5,32);
       int user = cgc_random_in_range(1, MAX_USERS - 1);
       hostlist[i].username = userlist[user].username;

@@ -36,13 +36,14 @@ char cgc_serviceTypes[MAX_SERVICE_TYPES][MAX_SERVICE_NAME];
 void cgc_InitializeFileSystem()
 {
   // Create Service Types
-  for (int i=0; i< MAX_SERVICE_TYPES; i++)
+  int i;
+  for (i=0; i< MAX_SERVICE_TYPES; i++)
   {
     cgc_populate_random_string(cgc_serviceTypes[i], cgc_random_in_range(MAX_SERVICE_NAME/2, MAX_SERVICE_NAME));
   }
 
   int treeNameLen = cgc_random_in_range(MAX_TREENAME_LEN / 2, MAX_TREENAME_LEN);
-  for (int i=0; i < MAX_TREES - 1; i++)
+  for (i=0; i < MAX_TREES - 1; i++)
   {
     fs_tree *tree = &allTrees[i];
     tree->treeID = cgc_rand();

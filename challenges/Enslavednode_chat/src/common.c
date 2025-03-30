@@ -41,7 +41,7 @@ int cgc_readline(int fd, char *buf, cgc_size_t max, cgc_size_t *nrx)
     } else if (ret == 0 && n == (cgc_size_t)NULL) {
       break;
     } else if (ret == 0 && n != (cgc_size_t)NULL) {
-      char *nl = cgc_strchr(tmp, '\n');
+      char *nl = (void *) cgc_strchr(tmp, '\n');
 
       // just newline, i.e. input = "\n"
       if (*nrx == 0 && nl == tmp)

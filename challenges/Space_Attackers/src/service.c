@@ -77,12 +77,13 @@ void cgc_createEnemies() {
 
 int** cgc_createBoard (int m, int n) {
     int** board = cgc_malloc(m * sizeof(int*));
-    for (int i= 0; i < m; ++i)
+    int i;
+    for (i= 0; i < m; ++i)
     {
         board[i] = cgc_malloc(n * sizeof(int));
     }
     // clear board
-    for (int i = 0; i < m; i++)
+    for (i = 0; i < m; i++)
     {
         for (int j = 0; j < n; j++)
         {
@@ -285,14 +286,15 @@ int cgc_drawBoard() {
     
     //draw current board
     //draw top
-    for (int i = 0; i < columns+2; i++)
+    int i;
+    for (i = 0; i < columns+2; i++)
     {
         cgc_fprintf(cgc_stdout, "-");
     }
     cgc_fprintf(cgc_stdout, "\n");
     
     // print the actors
-    for (int i = 0; i < rows; i++)
+    for (i = 0; i < rows; i++)
     {
         //fprintf(cgc_stdout, "%02d|", i);
         cgc_fprintf(cgc_stdout, "|");
@@ -327,7 +329,7 @@ int cgc_drawBoard() {
     
     //draw bottom
     //fprintf(cgc_stdout, "  ");
-    for (int i = 0; i < columns+2; i++)
+    for (i = 0; i < columns+2; i++)
     {
         cgc_fprintf(cgc_stdout, "-");
     }
@@ -383,7 +385,7 @@ int cgc_setupNewGame() {
     
     // instantiate user bullets array
     userBullets = (int**)cgc_calloc(rows, sizeof(int*));
-    for (int i = 0; i < rows; i++)
+    for (i = 0; i < rows; i++)
     {
         userBullets[i] = (int*)cgc_calloc(2, sizeof(int));
         userBullets[i][0] = -1;
@@ -392,7 +394,7 @@ int cgc_setupNewGame() {
     
     // instantiate enemy bullets array
     enemyBullets = (int**)cgc_calloc(rows*(columns/2), sizeof(int*));
-    for (int i = 0; i < (rows*(columns/2)); i++)
+    for (i = 0; i < (rows*(columns/2)); i++)
     {
         enemyBullets[i] = (int*) cgc_calloc(2, sizeof(int));
         enemyBullets[i][0] = -1;
@@ -493,7 +495,8 @@ void cgc_moveUser() {
 void cgc_updateBullets() {
     // go through all user bullets and advance them by 1
     // if the advance would move them off the map, then delete them
-    for (int i = 0; i < rows; i++)
+    int i;
+    for (i = 0; i < rows; i++)
     {
         // check if there is a bullet
         if (userBullets[i][0] != -1) {
@@ -514,7 +517,7 @@ void cgc_updateBullets() {
     
     // go through all enemy bullets and advance them by 1
     // if the advance would move them off the map, then delete them
-    for (int i = 0; i < (rows*(columns/2)); i++)
+    for (i = 0; i < (rows*(columns/2)); i++)
     {
         // check if there is a bullet
         if (enemyBullets[i][0] != -1) {
@@ -535,14 +538,15 @@ void cgc_updateBullets() {
 }
 
 void cgc_clearBullets() {
-    for (int i = 0; i < rows; i++) {
+    int i;
+    for (i = 0; i < rows; i++) {
         if((userBullets[i][0] != -1) && (board[userBullets[i][1]][userBullets[i][0]] == 4))
         {
             board[userBullets[i][1]][userBullets[i][0]] = 0;
         }
     }
     
-    for (int i = 0; i < (rows*(columns/2)); i++) {
+    for (i = 0; i < (rows*(columns/2)); i++) {
         if((enemyBullets[i][0] != -1) && (board[enemyBullets[i][0]][enemyBullets[i][1]] == 5))
         {
             board[enemyBullets[i][0]][enemyBullets[i][1]] = 0;
@@ -551,7 +555,8 @@ void cgc_clearBullets() {
 }
 
 void cgc_setBullets() {
-    for (int i = 0; i < rows; i++) {
+    int i;
+    for (i = 0; i < rows; i++) {
         if(userBullets[i][0] != -1)
         {
             // if there is a ship where the bullet now is, delete them both
@@ -577,7 +582,7 @@ void cgc_setBullets() {
     }
     
     // set enemy bullets
-    for (int i = 0; i < (rows*(columns/2)); i++) {
+    for (i = 0; i < (rows*(columns/2)); i++) {
         if(enemyBullets[i][0] != -1)
         {
             // if the user is where the bullet is, then lose
@@ -671,12 +676,13 @@ int main(int secret_page_i,  char *unused[]) {
             //draw top
             cgc_fprintf(cgc_stdout, "\t\t!!!DANCE MODE!!!\n\n\n\n\n");
             cgc_fprintf(cgc_stdout, "\n\n\n");
-            for (int j = 0; j < 12; j++) {
+	    int j, q;
+            for (j = 0; j < 12; j++) {
                 cgc_fprintf(cgc_stdout, "-");
             }
             cgc_fprintf(cgc_stdout, "\n");
             // draw middle
-            for (int q = 0; q < 10; q++) {
+            for (q = 0; q < 10; q++) {
                 cgc_fprintf(cgc_stdout, "|");
                 for (int k = 0; k < 10; k++) {
                     if (shipX == q && shipY == k) {
@@ -690,7 +696,7 @@ int main(int secret_page_i,  char *unused[]) {
                 cgc_fprintf(cgc_stdout, "|\n");
             }
             //draw bottom
-            for (int j = 0; j < 12; j++) {
+            for (j = 0; j < 12; j++) {
                 cgc_fprintf(cgc_stdout, "-");
             }
             cgc_fprintf(cgc_stdout, "\n");

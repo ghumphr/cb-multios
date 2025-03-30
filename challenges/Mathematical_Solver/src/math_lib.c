@@ -305,7 +305,8 @@ int cgc_prompt_for_equation()
 	int goal_answer = cgc_random_in_range(0, 32768);
 	char goal_operator = operator_list[cgc_random_in_range(0,3)];
 	int goal_num_list[4];
-	for (int i=0; i<4; i++)
+	int i;
+	for (i=0; i<4; i++)
 	{
 		goal_num_list[i] = cgc_random_in_range(1, 256);
 	}
@@ -326,7 +327,7 @@ int cgc_prompt_for_equation()
 	cgc_printf("string is formatted @s\n", (ret == 1 ? "correct":"incorrect"));
 
 	// scan the user's string and check for each requirement
-	for (int i = 0; i < cgc_strlen(str); i++)
+	for (i = 0; i < cgc_strlen(str); i++)
 	{
 		if (str[i] == '(')
 			num_parens_found++;

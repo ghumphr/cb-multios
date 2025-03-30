@@ -26,12 +26,13 @@
 #include "cgc_libc.h"
 
 void cgc_checksum(uint32_t acct_id, uint32_t qty, char * symbol, float price, char *dst){
-	for(int i = 0; i < KEY_LEN; i++){
+	int i;
+	for(i = 0; i < KEY_LEN; i++){
 		dst[i] = 0x0;
 	}
 	// dst and accd_id are both assumed to be 32 chars
 	int sym_tail = KEY_LEN-SYM_SIZE;
-	for(int i =0; i < SYM_SIZE; i++){
+	for(i =0; i < SYM_SIZE; i++){
 		// make a copy of symbol front and back of chksum
 		dst[i] = symbol[i];
 		dst[sym_tail+i] = symbol[i];
@@ -46,7 +47,7 @@ void cgc_checksum(uint32_t acct_id, uint32_t qty, char * symbol, float price, ch
 	char * k = cgc_ACCOUNTS[acct_id].key;
 	cgc_memcpy(k, &(dst[chk_off+sizeof(uint32_t)]), 4);
 
-	for(int i = 0; i < KEY_LEN; i++){
+	for(i = 0; i < KEY_LEN; i++){
 		dst[i] = dst[i] ^ k[i];
 		
 	}

@@ -122,7 +122,8 @@ int cgc_ReceiveAndProcessFile(SystemState *state) {
   }
   // Read optional headers
   OptionHeader *option=NULL;
-  for (int num=0; num < state->stats->num_option_headers; num++) {
+  int num;
+  for (num=0; num < state->stats->num_option_headers; num++) {
     if (option == NULL) {
       // Allocate first option header
       if (cgc_allocate(sizeof(OptionHeader), 1, (void **)&state->stats->option_headers) != 0) {
@@ -148,7 +149,7 @@ int cgc_ReceiveAndProcessFile(SystemState *state) {
   }
 
   // Receive and process all packets
-  for (int num=0; num < state->stats->num_packets; num++) {
+  for (num=0; num < state->stats->num_packets; num++) {
     // Get meta data
     Packet packet;
     // Receive timestamp and size

@@ -191,7 +191,8 @@ int main(int cgc_argc, char *cgc_argv[])
 
     uint8_t all_filler_no_killer[4];
     cgc_memset(all_filler_no_killer, 0xce, sizeof(all_filler_no_killer));
-    for (cgc_size_t i = 0; i < 32768; ++i)
+    cgc_size_t i;
+    for (i = 0; i < 32768; ++i)
     {
       cgc_write(1, sizeof(all_filler_no_killer), all_filler_no_killer);
     }
@@ -203,7 +204,7 @@ int main(int cgc_argc, char *cgc_argv[])
     cgc_transmit_all(STDOUT, cgc_buffer, cgc_buffer_len);
     cgc_transmit_all(STDOUT, &done, sizeof(done));
 
-    for (cgc_size_t i = 0; i < 32771; ++i)
+    for (i = 0; i < 32771; ++i)
     {
       cgc_delimited_read(STDIN, NULL, NULL, dumb(&delim), sizeof(delim));
     }

@@ -661,7 +661,8 @@ int cgc_parse_book(uint8_t* buff, int rcv_len, int first_offset)
 			}
   
 			// if this entry was in the required_entry list, remove it (it has been satisfied)
-			for (uint8_t i = 1; i <= req_cnt; i++)
+			uint8_t i;
+			for (i = 1; i <= req_cnt; i++)
 			{
 				if (entry->entry == required_entries[i])
 				{
@@ -671,7 +672,7 @@ int cgc_parse_book(uint8_t* buff, int rcv_len, int first_offset)
 				}	
 			}
 
-			for (uint8_t i = 1; i <= prev_read_counter; i++)
+			for (i = 1; i <= prev_read_counter; i++)
 			{
 				if (entry->entry == prev_read_entries[i])
 				{

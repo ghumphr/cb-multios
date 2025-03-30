@@ -47,8 +47,8 @@ int cgc_entanglement_razzmatazz(void) {
 
     // Do complex & irrelevant operations with the majority of the input.  
     // Throw result out.
-    cgc_size_t garbage = 1;
-    for (cgc_size_t i = 1; i < SZ_IRRELEVANT_BYTES; i++) {
+    cgc_size_t garbage = 1, i;
+    for (i = 1; i < SZ_IRRELEVANT_BYTES; i++) {
         garbage = (rx_buf[i] ^ (rx_buf[i+1] + rx_buf[i+2])) / 
             (garbage | 1); // avoids div by 0
     }
@@ -96,7 +96,7 @@ int cgc_entanglement_razzmatazz(void) {
                     rx_buf[GATE_OFF+2] << 16 | 
                     rx_buf[GATE_OFF+3] << 24;
 
-    cgc_size_t i = 0;
+    i = 0;
     unsigned char response = 0;
     if (GATE_MAGIC == gate) {
 #ifdef DEBUG
@@ -154,7 +154,8 @@ int cgc_causality_poppycock(void) {
 
     // Take in a lot of binary input, but "sanitize" much of it 
     // (e.g. modulo the input some limit to prevent later OOB access).
-    for (cgc_size_t i = 1; i < rx_bytes; i++) {   
+    cgc_size_t i;
+    for (i = 1; i < rx_bytes; i++) {   
 
         // Fail to sanitize some small subset of the binary input...
 #ifdef PATCHED
@@ -186,7 +187,7 @@ int cgc_causality_poppycock(void) {
     // Construct gate answer with default-unsanitized input.
     // Yes, even if patch is applied, sanitized input can sum to the gate.
     unsigned char gate = 0;
-    for (cgc_size_t i = 0; i < rx_bytes; i+=GATE_PRIME) {
+    for (i = 0; i < rx_bytes; i+=GATE_PRIME) {
         gate += rx_buf[i];
     }
 
@@ -218,7 +219,6 @@ int cgc_causality_poppycock(void) {
     // We construct output from vuln_buf, so they can't just throw out / ignore 
     // all these operations.
     cgc_size_t output = 0;
-    cgc_size_t i = 0;
     for (i = 0; i < SZ_VULN_BUF-3; i+=4) {
 
         output +=   vuln_buf[i+0] <<  0 |

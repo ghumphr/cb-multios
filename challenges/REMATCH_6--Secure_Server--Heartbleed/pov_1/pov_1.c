@@ -143,7 +143,8 @@ int main(int cgc_argc, char *cgc_argv[]) {
   msg.session_id = client_id;
 
   msg.checksum = 0;
-  for (int i=0; i < msg.msg_length; i++)
+  int i;
+  for (i=0; i < msg.msg_length; i++)
   {
     msg.checksum = ((msg.checksum << 8) | (msg.checksum >> 24)) ^ ((uint8_t *)&msg.msg_type)[i];
   }
@@ -157,7 +158,7 @@ int main(int cgc_argc, char *cgc_argv[]) {
   char buffer[600];
   // Send Client Hello Again
   msg.checksum = 0;
-  for (int i=0; i < msg.msg_length; i++)
+  for (i=0; i < msg.msg_length; i++)
   {
     msg.checksum = ((msg.checksum << 8) | (msg.checksum >> 24)) ^ ((uint8_t *)&msg.msg_type)[i];
   }
@@ -177,7 +178,7 @@ int main(int cgc_argc, char *cgc_argv[]) {
   hb.payload_length = 128 + 256;
 
   hb.checksum = 0;
-  for (int i=0; i < hb.msg_length; i++)
+  for (i=0; i < hb.msg_length; i++)
   {
     hb.checksum = ((hb.checksum << 8) | (hb.checksum >> 24)) ^ ((uint8_t *)&hb.hb_type)[i];
   }

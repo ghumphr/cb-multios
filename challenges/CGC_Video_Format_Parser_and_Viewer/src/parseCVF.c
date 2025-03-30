@@ -592,7 +592,8 @@ int cgc_parseCVFName( pBitStream pbs, pcvf pNewImage )
 		return 0;
 	}
 
-	for ( int i = 0; i < nameLength; i++ ) {
+	int i;
+	for ( i = 0; i < nameLength; i++ ) {
 		if ( cgc_readBits( pbs, 8, &t) == 0 ) {
 			return 0;
 		}
@@ -602,7 +603,7 @@ int cgc_parseCVFName( pBitStream pbs, pcvf pNewImage )
 	}
 
 	/// Ensure valid characters in the name field
-	for ( int i = 0; i < nameLength; i++) {
+	for ( i = 0; i < nameLength; i++) {
 		if ( !cgc_isascii( pNewImage->name[i] ) ){
 			cgc_printf("[ERROR] Invalid value in name field\n");
 			return 0;

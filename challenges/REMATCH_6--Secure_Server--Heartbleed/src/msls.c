@@ -329,11 +329,12 @@ uint32_t cgc_msls_generate_checksum_outgoing(SLS_MESSAGE *msg)
       SLS_APPLICATION_MESSAGE *ap_msg = (SLS_APPLICATION_MESSAGE *)msg->message;
       if (ap_msg)
       {
-        for (int i=0; i < SLS_APPLICATION_HEADER_LEN; i++)
+	int i;
+        for (i=0; i < SLS_APPLICATION_HEADER_LEN; i++)
         {
           checksum = ((checksum << 8) | (checksum >> 24)) ^ msg->message[i];
         }
-        for (int i=0; i < ap_msg->length; i++)
+        for (i=0; i < ap_msg->length; i++)
         {
           checksum = ((checksum << 8) | (checksum >> 24)) ^ ap_msg->contents[i];
         }
@@ -345,11 +346,12 @@ uint32_t cgc_msls_generate_checksum_outgoing(SLS_MESSAGE *msg)
       SLS_HEARTBEAT_MESSAGE *hb_msg = (SLS_HEARTBEAT_MESSAGE *)msg->message;
       if (hb_msg)
       {
-        for (int i=0; i < SLS_HEARTBEAT_HEADER_LEN; i++)
+	int i;
+        for (i=0; i < SLS_HEARTBEAT_HEADER_LEN; i++)
         {
           checksum = ((checksum << 8) | (checksum >> 24)) ^ msg->message[i];
         }
-        for (int i=0; i < hb_msg->payload_length; i++)
+        for (i=0; i < hb_msg->payload_length; i++)
         {
           checksum = ((checksum << 8) | (checksum >> 24)) ^ hb_msg->payload[i];
         }
@@ -361,11 +363,12 @@ uint32_t cgc_msls_generate_checksum_outgoing(SLS_MESSAGE *msg)
       SLS_HANDSHAKE_MESSAGE *hs_msg = (SLS_HANDSHAKE_MESSAGE *)msg->message;
       if (hs_msg)
       {
-        for (int i=0; i < SLS_HANDSHAKE_HEADER_LEN; i++)
+	int i;
+        for (i=0; i < SLS_HANDSHAKE_HEADER_LEN; i++)
         {
           checksum = ((checksum << 8) | (checksum >> 24)) ^ msg->message[i];
         }
-        for (int i=0; i < hs_msg->msg_length; i++)
+        for (i=0; i < hs_msg->msg_length; i++)
         {
           checksum = ((checksum << 8) | (checksum >> 24)) ^ hs_msg->message[i];
         }

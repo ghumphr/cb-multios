@@ -859,7 +859,8 @@ unsigned int cgc_make_epoch( int year, int month, int day, int hour, int minute,
 		daysInEachMonth[1] = 28; 
 	}
 	//add seconds in years from 1970 to now
-	for (int i = 1970; i < year; i++){
+	int i;
+	for (i = 1970; i < year; i++){
 		//not leap year
 		if (  ( i % 4 ) || ( i == 2100 )  ){
 			retval += 31536000;
@@ -868,7 +869,7 @@ unsigned int cgc_make_epoch( int year, int month, int day, int hour, int minute,
 		}
 	}
 	//add seconds in months for current year
-	for (int i = 1; i < month; i++){
+	for (i = 1; i < month; i++){
 		retval += (daysInEachMonth[i-1] * 86400);
 	}
 	//add seconds in days of current month

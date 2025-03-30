@@ -5,8 +5,11 @@ project(challenge_sets C CXX)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Needed for newer challenges
-set(CMAKE_C_STANDARD 99)
+# Note: this makes is so some challenges won't compile
+set(CMAKE_C_STANDARD 90)
 set(CMAKE_CXX_STANDARD 11)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lstdc++")
 
 if(WIN32)
     # Need to use MASM on windows

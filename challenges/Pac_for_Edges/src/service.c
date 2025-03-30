@@ -98,12 +98,12 @@ int cgc_acceptImage(struct image * myImage)
     // allocate the image struct pointer
     myImage->data = cgc_calloc(1, (height*width));
     myImage->pixels = cgc_calloc(1, height*sizeof(int *));
-    for(int i = 0; i < height; i++)
+    for(i = 0; i < height; i++)
     {
         myImage->pixels[i] = cgc_calloc(1, width*sizeof(int));
     }
     myImage->gradient_angle = cgc_calloc(1, height*sizeof(int *));
-    for(int i = 0; i < height; i++)
+    for(i = 0; i < height; i++)
     {
         myImage->gradient_angle[i] = cgc_calloc(1, width*sizeof(int));
     }
@@ -389,7 +389,8 @@ char cgc_getUserInput() {
 void cgc_drawBoard(int board[20][20])
 {
     // draw the top barrier
-    for(int i = 0; i < 22; i++)
+    int i;
+    for(i = 0; i < 22; i++)
     {
         cgc_fprintf(cgc_stdout, "-");
     }
@@ -423,7 +424,7 @@ void cgc_drawBoard(int board[20][20])
     }
 
     // draw the bottom barrier
-    for(int i = 0; i < 22; i++)
+    for(i = 0; i < 22; i++)
     {
         cgc_fprintf(cgc_stdout, "-");
     }

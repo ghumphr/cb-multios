@@ -25,9 +25,10 @@
 double cgc_exponential(double x) {
 	double sum = 1.0;
 
-	for (int t = 1; t < EXP_NUM_TERMS; t++) {
+	int t, n;
+	for (t = 1; t < EXP_NUM_TERMS; t++) {
 		double numerator=1.0;
-		for (int n = 0; n < t; n++) {
+		for (n = 0; n < t; n++) {
 			numerator = numerator * x / (n+1);
 		}
 
@@ -48,10 +49,11 @@ double cgc_ln(double x) {
 		powerOfTwos++;
 	}
 
-	for (int t = 1; t < LN_NUM_TERMS+1; t++) {
+	int t, n;
+	for (t = 1; t < LN_NUM_TERMS+1; t++) {
 		double numerator= 1.0;
 		int sign = 1;
-		for(int n = 0; n < t; n++) {
+		for(n = 0; n < t; n++) {
 			sign = sign * -1;
 			numerator = numerator * (x - 1);
 		}
@@ -95,13 +97,14 @@ double cgc_cosine(double x) {
 			x = x - 2*PI;
 	}
 
-	for (int t = 1; t < TRIG_NUM_TERMS; t++) {
+	int n, t;
+	for (t = 1; t < TRIG_NUM_TERMS; t++) {
 		double numerator=1.0;
-		for (int n = 0; n < 2*t; n++) {
+		for (n = 0; n < 2*t; n++) {
 			numerator = numerator * x / (n+1);
 		}
 		int sign = 1;
-		for (int n = 0; n<t; n++) {
+		for (n = 0; n<t; n++) {
 			sign = sign * -1;
 		}
 
@@ -123,15 +126,16 @@ double cgc_sine(double x) {
 	}
 
 	sum = x;
-	for (int t = 1; t < TRIG_NUM_TERMS; t++) {
+	int n, t;
+	for (t = 1; t < TRIG_NUM_TERMS; t++) {
 		double numerator = 1.0;
 		int sign = 1;
 
-		for(int n = 0; n < 2*t + 1; n++) {
+		for(n = 0; n < 2*t + 1; n++) {
 			numerator = numerator * x / (n+1);
 		}
 
-		for(int n = 0; n < t; n++) {
+		for(n = 0; n < t; n++) {
 			sign = sign*-1;
 		}
 
@@ -155,15 +159,16 @@ double cgc_atan(double x) {
 		return arctanU+ cgc_atan(v);
 	}
 
-	for (int t = 1; t < TRIG_NUM_TERMS; t++) {
+	int n, t;
+	for (t = 1; t < TRIG_NUM_TERMS; t++) {
 		double numerator = 1.0;
 		int sign = 1;
 
-		for(int n = 0; n < 2*t + 1; n++) {
+		for(n = 0; n < 2*t + 1; n++) {
 			numerator = numerator * x;
 		}
 
-		for(int n = 0; n < t; n++) {
+		for(n = 0; n < t; n++) {
 			sign = sign*-1;
 		}
 

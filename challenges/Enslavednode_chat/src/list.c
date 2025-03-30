@@ -139,11 +139,12 @@ list *cgc_copy_list(const list *l, cgc_size_t start, cgc_size_t stop)
   list *copy = NULL;
 
   // Get to start
-  for (cgc_size_t i = 0; i < start; i++)
+  cgc_size_t i;
+  for (i = 0; i < start; i++)
     p = p->n;
 
   // Copy from start to stop
-  for (cgc_size_t i = start; i < stop; i++, p = p->n)
+  for (i = start; i < stop; i++, p = p->n)
     cgc_append_list(&copy, p->d, 1);
 
   return copy;

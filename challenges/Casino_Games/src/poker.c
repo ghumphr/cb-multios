@@ -121,7 +121,8 @@ void cgc_poker(player_info *player)
 		// Mark any cards to hold (Card positions are numbered 1 through 5)
 		char hold[5];
 		cgc_bzero(hold, sizeof(hold));
-		for (int i=0; i<5; i++)
+		int i;
+		for (i=0; i<5; i++)
 		{
 			if ((input[i] >= '1')&&(input[i]<= '5'))
 			{
@@ -129,7 +130,7 @@ void cgc_poker(player_info *player)
 			}
 		}
 		// Draw Again
-		for (int i=0; i<5; i++)
+		for (i=0; i<5; i++)
 		{
 			if (hold[i] == 0)
 			{
@@ -186,7 +187,7 @@ void cgc_poker(player_info *player)
 		cgc_sort_by_value(hand, sizeof(hand));
 
 		// Check for multiples
-		int i = 0;
+		i = 0;
 		int four_of_a_kind = 0;
 		int three_of_a_kind = 0;
 		int pair = 0;
