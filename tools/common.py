@@ -2,6 +2,7 @@ import os
 import sys
 import thread
 import threading
+import ctypes
 
 # For OS specific tasks
 IS_DARWIN = sys.platform == 'darwin'
@@ -37,6 +38,25 @@ class TimeoutError(Exception):
     pass
 
 
+def interrupt_main_thread():
+    """Extremely dangerous and discouraged. Interrupts the main thread."""
+    main_thread_id = threading.main_thread().ident
+    if main_thread_id is None:
+        print("Could not get main thread ID.")
+        return
+
+    res = ctypes.pythonapi.PyThreadState_SetAsyncExc(
+        ctypes.c_long(main_thread_id), ctypes.py_object(KeyboardInterrupt)
+    )
+
+    if res == 0:
+        print("Invalid thread ID.")
+    elif res > 1:
+        # Re-raise the exception if something bad happened.
+        ctypes.pythonapi.PyThreadState_SetAsyncExc(ctypes.c_long(main_thread_id), None)
+        print("PyThreadState_SetAsyncExc failed.")
+
+
 class Timeout(object):
     """
     A timeout context manager that uses a thread based timer instead of SIGALRM
@@ -54,7 +74,7 @@ class Timeout(object):
     raise_timeout = True  # Raises a TimeoutError if this is True
 
     def __init__(self, seconds):
-        self.timer = threading.Timer(seconds, thread.interrupt_main)
+        self.timer = threading.Timer(seconds, interrupt_main_thread)
         self.timed_out = False
 
     def __enter__(self):

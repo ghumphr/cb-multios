@@ -14,7 +14,8 @@ TOOLS_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(TOOLS_DIR)
 CHAL_DIR = os.path.join(ROOT, 'challenges')
 POLL_DIR = os.path.join(ROOT, 'polls')
-BUILD_DIR = os.path.join(ROOT, 'build', 'challenges')
+BUILD_DIR = os.path.join(ROOT, 'build64', 'challenges')
+print(f"BUILD_DIR={BUILD_DIR}")
 
 IS_WINDOWS = sys.platform == 'win32'
 
@@ -80,10 +81,11 @@ class Tester:
         Returns:
             (int, int): # of tests run, # of tests passed
         """
+        output = output.decode("utf-8")
         # If the test failed to run, consider it failed
         if 'TOTAL TESTS' not in output:
             debug('\nWARNING: there was an error running a test')
-            print output
+            print(output)
             return 0, 0
 
         if 'timed out' in output:
@@ -108,9 +110,11 @@ class Tester:
                   '--xml_dir', xml_dir,
                   '--concurrent', '4',
                   '--timeout', '5',
-                  '--negotiate_seed', '--cb'] + map(add_ext, bin_names)
+                  '--negotiate_seed', '--cb'] + list(map(add_ext, bin_names))
         if should_core:
             cb_cmd += ['--should_core']
+
+        print(f"cmd: {" ".join(cb_cmd)}")
 
         p = subprocess.Popen(cb_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=TOOLS_DIR)
         out, err = p.communicate()

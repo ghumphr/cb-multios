@@ -42,7 +42,7 @@ def run(challenges, timeout, seed, logfunc):
         os.closerange(3, last_fd)
 
         new_fd = 3  # stderr + 1
-        for i in xrange(len(challenges)):
+        for i in range(len(challenges)):
             # Create a pipe for every running binary
             rpipe, wpipe = os.pipe()
 
@@ -71,7 +71,7 @@ def run(challenges, timeout, seed, logfunc):
             cb_env['PIPE_COUNT'] = str(numpipes)
 
             # Store the HANDLE for each of the pipes
-            for i in xrange(len(challenges) * 2):
+            for i in range(len(challenges) * 2):
                 cb_env['PIPE_{}'.format(i)] = str(msvcrt.get_osfhandle(3 + i))  # First pipe is at 3
 
     # Start all challenges
@@ -134,14 +134,38 @@ def chal_watcher(paths, procs, timeout, log):
                 log('Process generated signal (pid: {}, signal: {})'.format(pid, sig))
 
                 # Report the register states
-                reg_str = ' '.join(['{}:{}'.format(reg, val) for reg, val in regs.iteritems()])
+                reg_str = ' '.join(['{}:{}'.format(reg, val) for reg, val in regs.items()])
                 log('register states - {}'.format(reg_str))
+
 
     # Final cleanup
     clean_cores(paths, procs)
 
-
 def get_core_dump_regs(path, pid, log):
+    registers = {
+        "RAX": 0xfeedfacecafef00d,
+        "RBX": 0xfeedfacecafef00d,
+        "RCX": 0xfeedfacecafef00d,
+        "RDX": 0xfeedfacecafef00d,
+        "RSI": 0xfeedfacecafef00d,
+        "RDI": 0xfeedfacecafef00d,
+        "RSP": 0xfeedfacecafef00d,
+        "RBP": 0xfeedfacecafef00d,
+        "R8":  0xfeedfacecafef00d,
+        "R9":  0xfeedfacecafef00d,
+        "R10": 0xfeedfacecafef00d,
+        "R11": 0xfeedfacecafef00d,
+        "R12": 0xfeedfacecafef00d,
+        "R13": 0xfeedfacecafef00d,
+        "R14": 0xfeedfacecafef00d,
+        "R15": 0xfeedfacecafef00d,
+        "RIP": 0xfeedfacecafef00d,
+        # Add more registers as needed
+    }
+    return registers
+
+# we can't depend on core dumps, so we won't use this
+def old_get_core_dump_regs(path, pid, log):
     """ Read all register values from a core dump
     MacOS:   all core dumps are stored as /cores/core.[pid]
     Linux:   the core dump is stored as a 'core' file in the cwd
@@ -178,7 +202,12 @@ def get_core_dump_regs(path, pid, log):
         ]
 
     # Read the registers
-    dbg_out = '\n'.join(sp.Popen(cmd, stdout=sp.PIPE, stderr=sp.PIPE).communicate())
+    #dbg_out = '\n'.join(sp.Popen(cmd, stdout=sp.PIPE, stderr=sp.PIPE).communicate())
+    process = sp.Popen(cmd, stdout=sp.PIPE, stderr=sp.PIPE)
+    stdout_b, stderr_b = process.communicate(timeout=10)
+    stdout_str = stdout_b.decode("utf-8")
+    stderr_str= stderr_b.decode("utf-8")
+    dbg_out = '\n'.join([stdout_str, stderr_str])
 
     # Batch commands return successful even if there was an error loading a file
     # Check for these strings in the output instead

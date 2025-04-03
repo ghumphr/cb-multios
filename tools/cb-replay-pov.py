@@ -37,6 +37,7 @@ import os
 import signal
 import struct
 import threading
+import binascii
 
 from common import IS_WINDOWS, Timeout, TimeoutError
 import challenge_runner
@@ -95,7 +96,7 @@ class Throw(object):
         self.pov_seed = pov_seed
 
     def log(self, data):
-        print "# %s" % data
+        print("# %s" % data)
 
     def count_bits_set(self, value):
         count = 0
@@ -105,7 +106,7 @@ class Throw(object):
         return count
 
     def read_all(self, fd, data_len):
-        data = ''
+        data = b''
         while len(data) < data_len:
             read = os.read(fd, data_len - len(data))
             assert len(read)
@@ -235,8 +236,10 @@ class Throw(object):
     def gen_seed(self):
         """ Prepare the seed that will be used in the replay """
         seed = os.urandom(48)
-        self.log("using seed: %s" % seed.encode('hex'))
-        return seed.encode('hex')
+        hexseed = binascii.hexlify(seed).decode("utf-8")
+        #self.log("using seed: %s" % seed.encode('hex'))
+        self.log("using seed: %s" % hexseed)
+        return hexseed
 
     def run(self):
         """ Iteratively execute each of the actions within the POV
